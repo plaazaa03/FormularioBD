@@ -19,6 +19,7 @@
                 echo "<ul>";
                 echo "<li>" . $tarea->getNombre() . "</li>";
                 echo "</ul>";
+                echo "<a href='modificarTarea.php?id=" . $tarea->getId() . "'>Modificar Tarea</a>";
             }
 
             ?>

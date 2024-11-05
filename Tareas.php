@@ -14,6 +14,11 @@ class Tareas
         $this->fechaFin = $fechaFin;
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+    
     public function getNombre()
     {
         return $this->nombre;

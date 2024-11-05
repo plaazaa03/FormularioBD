@@ -73,7 +73,22 @@ function crearTareas()
 
 function modificarTareas() {
     $conexion = conectarBD();
+    $id = $_GET['id'];
+    $nombre = $_POST['nombre'];
 
+    $sql = "UPDATE Tareas SET nombre = ? WHERE id = ?";
+    $queryFormateado = $conexion->prepare($sql);
+    $queryFormateado->bind_param("si", $nombre, $id);
+    $todoBien = $queryFormateado->execute();
+
+    if ($todoBien) {
+        echo "<p>Tarea modificada con exito</p>";
+        $conexion->close();
+    } else {
+        echo "Error: " . $sql . "<br>" . $conexion->error;
+    }
+
+    return $todoBien;
 }
 
 function eliminarTarea() {
