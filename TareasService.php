@@ -34,12 +34,6 @@ function obtenerTareas()
         
     }
 
-    foreach ($tareas as $tarea) {
-        echo "<ul>";
-        echo "<li>" . $tarea->getNombre() . "</li>";
-        echo "</ul>";
-    }
-
     $conexion->close();
 
     return $tareas;
