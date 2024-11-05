@@ -27,24 +27,8 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         require_once('TareasService.php');
 
-        $conexion = conectarBD();    
+        $newTarea = crearTareas();
         
-        // recuperar informacion del formulario
-        $nombre = $_POST['nombre'];
-        // realizar la insercion
-        $sql = "INSERT INTO Tareas (nombre) VALUES (?)";
-        // preparar la consulta
-        $queryFormateado = $conexion->prepare($sql);
-        // ejecutar la consulta
-        $queryFormateado->bind_param("s", $nombre);
-        $todoBien = $queryFormateado->execute();
-
-        if ($todoBien) {
-            echo "<p>Registro guardado con exito</p>";
-            $conexion->close();
-        } else {
-            echo "Error: " . $sql . "<br>" . $conexion->error;
-        }
     }
 
 
