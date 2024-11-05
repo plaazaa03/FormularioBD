@@ -15,13 +15,6 @@
 
             $tareas = obtenerTareas();
 
-            foreach ($tareas as $tarea) {
-                echo "<ul>";
-                echo "<li>" . $tarea->getNombre() . "</li>";
-                echo "</ul>";
-            }
-
-
             ?>
             <a href="formulario.php">Crear Tarea</a>
         </body>

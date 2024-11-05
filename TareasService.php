@@ -31,6 +31,13 @@ function obtenerTareas()
     while ($fila = $resultado->fetch_assoc()) {
         //mostramos el nombre de la primera tarea
         $tareas[] = new Tareas($fila['id'], $fila['nombre'], $fila['fechaFin']);
+        
+    }
+
+    foreach ($tareas as $tarea) {
+        echo "<ul>";
+        echo "<li>" . $tarea->getNombre() . "</li>";
+        echo "</ul>";
     }
 
     $conexion->close();
