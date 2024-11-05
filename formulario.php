@@ -25,39 +25,26 @@
     <?php
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        //crear variables con la informacion para la conexion
-        $host = "localhost";
-        $bd = "PruebaPrimerDia";
-        $username = "root";
-        $password = "";
+        require_once('TareasService.php');
 
-        //crear la conexion
-        $conexion = new mysqli($host, $username, $password, $bd);
+        $conexion = conectarBD();    
+        
+        // recuperar informacion del formulario
+        $nombre = $_POST['nombre'];
+        // realizar la insercion
+        $sql = "INSERT INTO Tareas (nombre) VALUES (?)";
+        // preparar la consulta
+        $queryFormateado = $conexion->prepare($sql);
+        // ejecutar la consulta
+        $queryFormateado->bind_param("s", $nombre);
+        $todoBien = $queryFormateado->execute();
 
-        //comprobar si se realiza la conexion
-        if (!$conexion->connect_error) {
-            // recuperar informacion del formulario
-            $nombre = $_POST['nombre'];
-            // realizar la insercion
-            $sql = "INSERT INTO Tareas (nombre) VALUES (?)";
-            // preparar la consulta
-            $queryFormateado = $conexion->prepare($sql);
-            // ejecutar la consulta
-            $queryFormateado->bind_param("s", $nombre);
-            $todoBien = $queryFormateado->execute();
-
-            if ($todoBien) {
-                echo "<p>Registro guardado con exito</p>";
-                $conexion->close();
-            } else {
-                echo "Error: " . $sql . "<br>" . $conexion->error;
-            }
-
+        if ($todoBien) {
+            echo "<p>Registro guardado con exito</p>";
+            $conexion->close();
         } else {
             echo "Error: " . $sql . "<br>" . $conexion->error;
-            die("Todo ha ido mal");
         }
-
     }
 
 
