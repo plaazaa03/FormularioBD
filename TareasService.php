@@ -9,15 +9,24 @@ function conectarBD()
     $username = "root";
     $password = "";
 
-    //crear la conexion
+    //crear la conexion mediante mysqli
     $conexion = new mysqli($host, $username, $password, $bd);
 
-    //comprobar si se realiza la conexion
+    //crear la conexion mediante PDO
+    // try {
+    //     $conexion = new PDO("mysql:host=$host;dbname=$bd", $username, $password);
+    //     return $conexion;
+    // } catch (PDOException $ex) {
+    //     die($ex->getMessage());
+    // }
+    //comprobar si se realiza la conexion mediante mysqli
     if (!$conexion->connect_error) {
         return $conexion;
     } else {
         die("Error al conectar: " . $conexion->connect_error);
     }
+
+    
 }
 
 function obtenerTareas()

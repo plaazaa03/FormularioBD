@@ -1,25 +1,28 @@
 <?php
 
 // clase de tareas
-class Tareas {
+class Tareas
+{
     public $id;
     public $nombre;
     public $fechaFin;
 
-    public function __construct($id, $nombre, $fechaFin) {
+    public function __construct($id, $nombre, $fechaFin)
+    {
         $this->id = $id;
         $this->nombre = $nombre;
         $this->fechaFin = $fechaFin;
     }
 
-    public function getNombre() {
+    public function getNombre()
+    {
         return $this->nombre;
     }
 
-    public function getFechaFin() {
+    public function getFechaFin()
+    {
         return $this->fechaFin;
     }
 }
-
 
 ?>

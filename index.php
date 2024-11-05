@@ -21,7 +21,6 @@
                 echo "</ul>";
             }
 
-
             ?>
             <a href="formulario.php">Crear Tarea</a>
         </body>
