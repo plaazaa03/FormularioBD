@@ -1,30 +1,46 @@
-<hmtl>
+<!DOCTYPE html>
+<html lang="es">
 
-    <head>
-        <link rel='stylesheet' type='text/css' media='screen' href='micss.css'>
+<head>
+    <meta charset="UTF-8">
+    <title>Obtención de datos desde Base de datos</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="micss.css">
+</head>
 
-    </head>
+<body>
     <header>
-        <h1>Obtencion de datos desde Base de datos</h1>
+        <h1>Obtención de datos desde Base de datos</h1>
     </header>
+
     <main>
+        <?php
+        require_once('TareasService.php');
 
-        <body>
-            <?php
-            require_once('TareasService.php');
+        $tareas = obtenerTareas();
+        ?>
 
-            $tareas = obtenerTareas();
+        <ul>
+            <?php foreach ($tareas as $tarea): ?>
+                
+                <li id="tarea-<?= $tarea->getId() ?>">
+                    <!-- Muestra el nombre de la tarea -->    
+                    <?= $tarea->getNombre() ?></li>
 
-            foreach ($tareas as $tarea) {
-                echo "<ul>";
-                echo "<li>" . $tarea->getNombre() . "</li>";
-                echo "</ul>";
-                echo "<a href='modificarTarea.php?id=" . $tarea->getId() . "'>Modificar Tarea</a>";
-            }
+                    <a href="modificarTarea.php?id=<?=$tarea->getId()?>">Modificar Tarea</a>
+                    <!-- Creamos el dialogo -->
+                    
+                    <button onclick="document.getElementById('dialog-<?=$tarea->getId()?>').showModal()">Detalles</button>
 
-            ?>
-            <a href="formulario.php">Crear Tarea</a>
-        </body>
+                    <dialog id="dialog-<?=$tarea->getId()?>">
+                        <p><?= htmlspecialchars($tarea->getNombre()) ?></p>
+                        <button onclick="document.getElementById('dialog-<?= $tarea->getId() ?>').close()">Cerrar</button>
+                    </dialog>
+                    
+
+            <?php endforeach; ?>
+        </ul>
+        <a href="formulario.php">Crear Tarea</a>
     </main>
+</body>
 
-</hmtl>
+</html>

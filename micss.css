@@ -90,3 +90,16 @@ a:hover {
   color: #388e3c;
 }
 
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1em;
+  margin: 10px 0px 10px 0px;
+
+}
+
