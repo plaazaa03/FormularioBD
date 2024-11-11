@@ -32,14 +32,32 @@ function conectarBD()
 function obtenerTareas()
 {
     $conexion = conectarBD();
-    $sql = "SELECT * FROM Tareas";
+    $sql = "SELECT * FROM Tareas where fecha_finalizacion is null";
 
     $resultado = $conexion->query($sql);
 
     //Nos permite obtener los datos necesarion del resultado
     while ($fila = $resultado->fetch_assoc()) {
         //mostramos el nombre de la primera tarea
-        $tareas[] = new Tareas($fila['id'], $fila['nombre'], $fila['fechaFin']);
+        $tareas[] = new Tareas($fila['id'], $fila['nombre'], $fila['fecha_finalizacion']);
+        
+    }
+
+    $conexion->close();
+
+    return $tareas;
+}
+
+function obtenerTareasFinalizadas() {
+    $conexion = conectarBD();
+    $sql = "SELECT * FROM Tareas where fecha_finalizacion is not null";
+
+    $resultado = $conexion->query($sql);
+
+    //Nos permite obtener los datos necesarion del resultado
+    while ($fila = $resultado->fetch_assoc()) {
+        //mostramos el nombre de la primera tarea
+        $tareas[] = new Tareas($fila['id'], $fila['nombre'], $fila['fecha_finalizacion']);
         
     }
 
@@ -93,7 +111,7 @@ function modificarTareas() {
 
 function finalizarTareas($id) {
     $conexion = conectarBD();
-    $miFecha = date("Y-m-d H:i:s");
+    $miFecha = date('Y-m-d H:i:s');
 
     $sql = "UPDATE Tareas SET fecha_finalizacion = ? WHERE id = ?";
     $queryFormateado = $conexion->prepare($sql);

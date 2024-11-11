@@ -104,6 +104,54 @@ button {
 }
 
 ::backdrop {
-  background-color: rgba(140, 22, 22, 0.5);
+  background-color: rgba(247, 196, 196, 0.5);
+  margin: auto;
+  padding: 20px;
+  text-align: center;
 }
 
+#form-eliminar {
+  background-color: #fff;
+  padding: 20px;
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+#crearTarea {
+  background-color: #000000;
+  color: white;
+  padding: 10px;
+}
+
+#crearTarea:hover {
+  background-color: #3f4240;
+}
+
+#obtenerTareasFinalizadas {
+  background-color: #000000;
+  color: white;
+  padding: 10px;
+}
+
+#obtenerTareasFinalizadas:hover {
+  background-color: #3f4240;
+}
+
+#texto-borrar {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: black;
+  font-size: 15px;
+}
+
+#eliminar-button{
+  background-color: red;
+  align-items: center;
+}
+
+#volverIndex{
+  background-color: #000000;
+  color: white;
+  padding: 10px;
+}

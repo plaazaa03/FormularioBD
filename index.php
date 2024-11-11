@@ -32,18 +32,19 @@
                     <button onclick="document.getElementById('dialog-<?=$tarea->getId()?>').showModal()">Detalles</button>
 
                     <dialog id="dialog-<?=$tarea->getId()?>">
-                        <p>Estas seguro de que deseas borrar la tarea: <?= htmlspecialchars($tarea->getNombre()) ?></p>
-                        <form action="eliminarTarea.php" method="post">
+                        <p id="texto-borrar">Estas seguro de que deseas finalizar la tarea: <?= htmlspecialchars($tarea->getNombre()) ?></p>
+                        <form id="form-eliminar" action="eliminarTarea.php" method="post">
                             <input type="hidden" name="id" value="<?=$tarea->getId()?>">
-                            <button type="submit">Eliminar</button>
-                            <button onclick="document.getElementById('dialog-<?= $tarea->getId() ?>').close()">Cerrar</button>
+                            <button id="eliminar-button" type="submit">Eliminar</button>
                         </form>
+                        <button onclick="document.getElementById('dialog-<?= $tarea->getId() ?>').close()">Cerrar</button>
                     </dialog>
                     
 
             <?php endforeach; ?>
         </ul>
-        <a href="formulario.php">Crear Tarea</a>
+        <a id="crearTarea" href="formulario.php">Crear Tarea</a>
+        <a id="obtenerTareasFinalizadas" href="obtenerTareasFinalizadas.php">Tareas Finalizadas</a>
     </main>
 </body>
 
