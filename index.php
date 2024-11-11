@@ -32,8 +32,12 @@
                     <button onclick="document.getElementById('dialog-<?=$tarea->getId()?>').showModal()">Detalles</button>
 
                     <dialog id="dialog-<?=$tarea->getId()?>">
-                        <p><?= htmlspecialchars($tarea->getNombre()) ?></p>
-                        <button onclick="document.getElementById('dialog-<?= $tarea->getId() ?>').close()">Cerrar</button>
+                        <p>Estas seguro de que deseas borrar la tarea: <?= htmlspecialchars($tarea->getNombre()) ?></p>
+                        <form action="eliminarTarea.php" method="post">
+                            <input type="hidden" name="id" value="<?=$tarea->getId()?>">
+                            <button type="submit">Eliminar</button>
+                            <button onclick="document.getElementById('dialog-<?= $tarea->getId() ?>').close()">Cerrar</button>
+                        </form>
                     </dialog>
                     
 

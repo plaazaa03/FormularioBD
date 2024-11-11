@@ -91,9 +91,23 @@ function modificarTareas() {
     return $todoBien;
 }
 
-function eliminarTarea() {
+function finalizarTareas($id) {
     $conexion = conectarBD();
+    $miFecha = date("Y-m-d H:i:s");
 
+    $sql = "UPDATE Tareas SET fecha_finalizacion = ? WHERE id = ?";
+    $queryFormateado = $conexion->prepare($sql);
+    $queryFormateado->bind_param("si", $miFecha, $id);
+    $todoBien = $queryFormateado->execute();
+
+    if ($todoBien) {
+        echo "<p>Tarea finalizada con exito</p>";
+        $conexion->close();
+    } else {
+        echo "Error: " . $sql . "<br>" . $conexion->error;
+    }
+
+    return $todoBien;
 }
 
 ?>

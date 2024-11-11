@@ -103,3 +103,7 @@ button {
 
 }
 
+::backdrop {
+  background-color: rgba(140, 22, 22, 0.5);
+}
+
