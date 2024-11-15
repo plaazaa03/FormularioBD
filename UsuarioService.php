@@ -20,4 +20,15 @@ function login() {
     }
 }
 
+function guardarUsuario($usuario) {
+    $conexion = conexionBD();
+
+    $sql = "INSERT INTO usuarios (nick, password, avatar) VALUES (?, ?, ?)";
+    $queryFormateada = $conexion -> prepare($sql);
+    $queryFormateada -> bind_param("sss", $usuario -> getNick(), $usuario -> getPassword(), $usuario -> getAvatar());
+    $sehaEjecutadoLaQuery = $queryFormateada -> execute();
+    $conexion -> close();
+    return $sehaEjecutadoLaQuery;
+}
+
 ?>
