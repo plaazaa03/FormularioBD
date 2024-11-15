@@ -15,8 +15,8 @@
     <main>
         <?php
         require_once('TareasService.php');
-
-        $tareas = obtenerTareas();
+        $finalizado = isset($_GET['finalizado']) ? $_GET['finalizado'] == 'true' : false;
+        $tareas = obtenerTareas($finalizado);
         ?>
 
         <ul>
@@ -27,8 +27,8 @@
                     <?= $tarea->getNombre() ?></li>
 
                     <a href="modificarTarea.php?id=<?=$tarea->getId()?>">Modificar Tarea</a>
-                    <!-- Creamos el dialogo -->
                     
+                    <!-- Creamos el dialogo -->
                     <button onclick="document.getElementById('dialog-<?=$tarea->getId()?>').showModal()">Detalles</button>
 
                     <dialog id="dialog-<?=$tarea->getId()?>">
@@ -44,7 +44,7 @@
             <?php endforeach; ?>
         </ul>
         <a id="crearTarea" href="formulario.php">Crear Tarea</a>
-        <a id="obtenerTareasFinalizadas" href="obtenerTareasFinalizadas.php">Tareas Finalizadas</a>
+        <!--<a id="obtenerTareasFinalizadas" href="obtenerTareasFinalizadas.php">Tareas Finalizadas</a>-->
     </main>
 </body>
 

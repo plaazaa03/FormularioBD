@@ -29,42 +29,57 @@ function conectarBD()
     
 }
 
-function obtenerTareas()
+function obtenerTareas($finalizado)
 {
     $conexion = conectarBD();
-    $sql = "SELECT * FROM Tareas where fecha_finalizacion is null";
 
-    $resultado = $conexion->query($sql);
+    if ($finalizado) {
+        $sql = "SELECT * FROM Tareas where fecha_finalizacion is not null";
+        $resultado = $conexion->query($sql);
 
-    //Nos permite obtener los datos necesarion del resultado
-    while ($fila = $resultado->fetch_assoc()) {
-        //mostramos el nombre de la primera tarea
-        $tareas[] = new Tareas($fila['id'], $fila['nombre'], $fila['fecha_finalizacion']);
-        
+        //Nos permite obtener los datos necesarion del resultado
+        while ($fila = $resultado->fetch_assoc()) {
+            //mostramos el nombre de la primera tarea
+            $tareas[] = new Tareas($fila['id'], $fila['nombre'], $fila['fecha_finalizacion']);
+            
+        }
+    
+        $conexion->close();
+    } else {
+        $sql = "SELECT * FROM Tareas where fecha_finalizacion is null"; 
+        $resultado = $conexion->query($sql);
+
+        //Nos permite obtener los datos necesarion del resultado
+        while ($fila = $resultado->fetch_assoc()) {
+            //mostramos el nombre de la primera tarea
+            $tareas[] = new Tareas($fila['id'], $fila['nombre'], $fila['fecha_finalizacion']);
+            
+        }
+    
+        $conexion->close();
     }
-
-    $conexion->close();
-
     return $tareas;
 }
 
-function obtenerTareasFinalizadas() {
-    $conexion = conectarBD();
-    $sql = "SELECT * FROM Tareas where fecha_finalizacion is not null";
+/*
+    function obtenerTareasFinalizadas() {
+        $conexion = conectarBD();
+        $sql = "SELECT * FROM Tareas where fecha_finalizacion is not null";
 
-    $resultado = $conexion->query($sql);
+        $resultado = $conexion->query($sql);
 
-    //Nos permite obtener los datos necesarion del resultado
-    while ($fila = $resultado->fetch_assoc()) {
-        //mostramos el nombre de la primera tarea
-        $tareas[] = new Tareas($fila['id'], $fila['nombre'], $fila['fecha_finalizacion']);
-        
+        //Nos permite obtener los datos necesarion del resultado
+        while ($fila = $resultado->fetch_assoc()) {
+            //mostramos el nombre de la primera tarea
+            $tareas[] = new Tareas($fila['id'], $fila['nombre'], $fila['fecha_finalizacion']);
+            
+        }
+
+        $conexion->close();
+
+        return $tareas;
     }
-
-    $conexion->close();
-
-    return $tareas;
-}
+*/
 
 function crearTareas()
 {

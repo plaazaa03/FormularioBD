@@ -15,7 +15,7 @@
 
 <body>
     <main>
-    <?php
+        <?php
         require_once('TareasService.php');
 
         $tareas = obtenerTareasFinalizadas();
@@ -23,16 +23,16 @@
 
         <ul>
             <?php foreach ($tareas as $tarea): ?>
-                
+
                 <li id="tarea-<?= $tarea->getId() ?>">
-                    <!-- Muestra el nombre de la tarea -->    
+                    <!-- Muestra el nombre de la tarea -->
                     La tarea <?= $tarea->getNombre() ?> finalizo el dia: <?= $tarea->getFechaFin() ?>
-                </li>                
+                </li>
             <?php endforeach; ?>
         </ul>
     </main>
 
-        <a id="volverIndex" href="index.php">Volver Index</a>
+    <a id="volverIndex" href="index.php">Volver Index</a>
 </body>
 
 </html>
