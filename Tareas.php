@@ -7,6 +7,7 @@ class Tareas
     public $nombre;
     public $fechaFin;
 
+
     public function __construct($id, $nombre, $fechaFin)
     {
         $this->id = $id;

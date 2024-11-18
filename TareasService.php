@@ -81,17 +81,18 @@ function obtenerTareas($finalizado)
     }
 */
 
-function crearTareas()
+function crearTareas($idUsuario)
 {
+
     $conexion = conectarBD();
     // recuperar informacion del formulario
     $nombre = $_POST['nombre'];
     // realizar la insercion
-    $sql = "INSERT INTO Tareas (nombre) VALUES (?)";
+    $sql = "INSERT INTO Tareas (nombre, id_usuario) VALUES (?,?)";
     // preparar la consulta
     $queryFormateado = $conexion->prepare($sql);
     // ejecutar la consulta
-    $queryFormateado->bind_param("s", $nombre);
+    $queryFormateado->bind_param("si", $nombre, $idUsuario);
     $todoBien = $queryFormateado->execute();
 
     if ($todoBien) {

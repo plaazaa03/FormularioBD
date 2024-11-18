@@ -7,6 +7,23 @@
 </head>
 <body>
     <?php
+
+session_start();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require_once("UsuarioService.php");
+    $nick = $_POST['nick'];
+    $password = $_POST['password'];
+    
+    $usuario = login($nick, $password);
+    
+    if ($usuario) {
+            $_SESSION['usuario'] = $usuario;
+            header("Location: index.php");
+            exit();
+        } else {
+            echo "<p id='error'>Usuario o contraseña incorrectas</p>";
+        }
+    }
     ?>
 
     <header>
@@ -23,6 +40,7 @@
 
             <input type="submit" value="Login">
         </form>
+        <a href="registro.php">Registrarse</a>
     </main>
 </body>
 </html>

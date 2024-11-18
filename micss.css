@@ -29,16 +29,16 @@ form label {
   margin-bottom: 10px;
 }
 
-form input[type="text"] {
+form input[type="text"], form input[type="password"], form input[type="file"] {
   width: 93%;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-right: 15px;
 }
 
-.operaciones input[type="submit"] {
+
+form input[type="submit"] {
   background-color: #4caf50;
   color: white;
   padding: 10px;
@@ -49,7 +49,7 @@ form input[type="text"] {
   font-size: 1em;
 }
 
-.operaciones input[type="submit"]:hover {
+form input[type="submit"]:hover {
   background-color: #45a049;
 }
 
@@ -154,4 +154,13 @@ button {
   background-color: #000000;
   color: white;
   padding: 10px;
+}
+
+#error {
+  color: red;
+}
+
+img {
+  width: 100px;
+  height: 100px;
 }

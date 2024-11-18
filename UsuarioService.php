@@ -1,12 +1,41 @@
 <?php
 session_start();
 require_once 'usuario.php';
-function login() {
-    $conexion = conexionBD();
 
-    $sql = "SELECT * FROM usuarios WHERE nick = ? AND password = ?";
+function conectarBD()
+{
+    //crear variables con la informacion para la conexion
+    $host = "localhost";
+    $bd = "PruebaPrimerDia";
+    $username = "root";
+    $password = "";
+
+    //crear la conexion mediante mysqli
+    $conexion = new mysqli($host, $username, $password, $bd);
+
+    //crear la conexion mediante PDO
+    // try {
+    //     $conexion = new PDO("mysql:host=$host;dbname=$bd", $username, $password);
+    //     return $conexion;
+    // } catch (PDOException $ex) {
+    //     die($ex->getMessage());
+    // }
+    //comprobar si se realiza la conexion mediante mysqli
+    if (!$conexion->connect_error) {
+        return $conexion;
+    } else {
+        die("Error al conectar: " . $conexion->connect_error);
+    }
+
+    
+}
+
+function login($nick, $password) {
+    $conexion = conectarBD();
+
+    $sql = "SELECT * FROM Usuario WHERE nick = ? AND password = ?";
     $queryFormateada = $conexion -> prepare($sql);
-    $queryFormateada -> bind_param("ss", $_POST['nick'], $_POST['password']);
+    $queryFormateada -> bind_param("ss", $nick, $password);
     $sehaEjecutadoLaQuery = $queryFormateada -> execute();
     $resultado = $queryFormateada -> get_result();
 
@@ -20,15 +49,20 @@ function login() {
     }
 }
 
-function guardarUsuario($usuario) {
-    $conexion = conexionBD();
+function guardarUsuario($nick, $password, $avatar) {
+    $conexion = conectarBD();
 
-    $sql = "INSERT INTO usuarios (nick, password, avatar) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO Usuario (nick, password, avatar) VALUES (?, ?, ?)";
     $queryFormateada = $conexion -> prepare($sql);
-    $queryFormateada -> bind_param("sss", $usuario -> getNick(), $usuario -> getPassword(), $usuario -> getAvatar());
+    $queryFormateada -> bind_param("sss", $nick, $password, $avatar);
     $sehaEjecutadoLaQuery = $queryFormateada -> execute();
     $conexion -> close();
-    return $sehaEjecutadoLaQuery;
+
+    if ($sehaEjecutadoLaQuery) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 ?>

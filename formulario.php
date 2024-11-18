@@ -23,19 +23,21 @@
     </form>
 
     <?php
+    require_once('TareasService.php');
+    require_once('usuario.php');
+    session_start();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        require_once('TareasService.php');
-
-        $newTarea = crearTareas();
-        
+        //pillar el id de la sesion
+        if (isset($_SESSION['usuario'])) {
+            $idUsuario = $_SESSION['usuario']->getId();
+            $newTarea = crearTareas($idUsuario);
+        } else {
+            header("Location: Login.php");
+            exit();
+        }
     }
-
-
-
-
     ?>
     <a id="volverIndex" href="index.php">Volver Index</a>
 </body>
-
 </html>
