@@ -26,9 +26,8 @@
 </head>
 
 <header>
-        <h1>Obtención de datos desde Base de datos</h1>
-        <img src="<?= $usuario->getAvatar() ?>" alt="Avatar del usuario">
-
+    <img src="<?= $usuario->getAvatar() ?>" alt="Avatar del usuario" id="avatar">
+    <h1>Usuario, <?= $usuario->getNick() ?></h1>
 </header>
 
 <body>
@@ -46,7 +45,7 @@
                 <a href="modificarTarea.php?id=<?= $tarea->getId() ?>">Modificar Tarea</a>
 
                 <!-- Creamos el dialogo -->
-                <button onclick="document.getElementById('dialog-<?= $tarea->getId() ?>').showModal()">Detalles</button>
+                <button onclick="document.getElementById('dialog-<?= $tarea->getId() ?>').showModal()">Finalizar Tarea</button>
 
                 <dialog id="dialog-<?= $tarea->getId() ?>">
                     <p id="texto-borrar">Estas seguro de que deseas finalizar la tarea:
@@ -55,7 +54,7 @@
                         <input type="hidden" name="id" value="<?= $tarea->getId() ?>">
                         <button id="eliminar-button" type="submit">Eliminar</button>
                     </form>
-                    <button onclick="document.getElementById('dialog-<?= $tarea->getId() ?>').close()">Cerrar</button>
+                    <button id="cerrar-button" onclick="document.getElementById('dialog-<?= $tarea->getId() ?>').close()">Cerrar</button>
                 </dialog>
 
 
